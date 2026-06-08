@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prime Origins Global — California Craft Cannabis for the Hash Market</title>
+<meta name="description" content="Prime Origins Global: appellation-grade California cannabis and authentic Moroccan hash, sold with verifiable provenance. The flagship of the Prime Origins ecosystem.">
+<style>
+  :root{
+    --forest:#13221A; --panel:#1C3127; --panel2:#21392D; --dark:#0E1A14;
+    --gold:#D9A441; --gold-dim:#B3863A; --cream:#F0EADB; --mute:#9FB5A6; --green:#6FA287;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--forest);color:var(--cream);font-family:'Helvetica Neue',Arial,sans-serif;line-height:1.6}
+  h1,h2,h3,.serif{font-family:Georgia,'Times New Roman',serif}
+  a{color:var(--gold);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  .label{color:var(--gold);font-size:.72rem;font-weight:700;letter-spacing:.25em;text-transform:uppercase}
+
+  header{position:sticky;top:0;background:rgba(14,26,20,.95);backdrop-filter:blur(8px);border-bottom:1px solid rgba(217,164,65,.25);z-index:10}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;max-width:1080px;margin:0 auto}
+  .logo{color:var(--gold);font-weight:700;letter-spacing:.3em;font-size:.95rem;display:flex;align-items:center;gap:10px}
+  .logo img{height:30px;width:auto;display:block;mix-blend-mode:screen}
+  .nav-links a{margin-left:22px;font-size:.85rem;color:var(--cream)}
+  .nav-links a:hover{color:var(--gold);text-decoration:none}
+
+  .hero{padding:96px 0 64px;border-bottom:4px solid var(--gold)}
+  .hero h1{font-size:clamp(2rem,5vw,3.4rem);line-height:1.15;margin:18px 0}
+  .hero p.lead{color:var(--mute);font-size:1.1rem;max-width:680px}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-top:44px}
+  .stat{background:var(--panel);border-top:3px solid var(--gold);padding:20px;text-align:center}
+  .stat .v{font-family:Georgia,serif;font-size:1.7rem;font-weight:700;color:var(--gold)}
+  .stat .l{font-size:.78rem;color:var(--mute);margin-top:4px}
+
+  section{padding:72px 0}
+  section h2{font-size:1.9rem;margin:10px 0 8px}
+  .sub{color:var(--gold);font-style:italic;font-family:Georgia,serif;margin-bottom:34px}
+
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+  .card{background:var(--panel);border-left:4px solid var(--gold);padding:26px}
+  .card.alt{background:var(--panel2)}
+  .card h3{color:var(--gold);font-size:1.15rem;margin-bottom:10px}
+  .card p,.card li{color:var(--cream);font-size:.92rem}
+  .card ul{margin:10px 0 0 18px}
+  .card li{margin-bottom:8px;color:var(--mute)}
+  .card .tag{display:block;font-size:.7rem;letter-spacing:.2em;color:var(--gold);font-weight:700;margin-bottom:6px;text-transform:uppercase}
+
+  .band{background:var(--dark);padding:36px 0}
+  .band p{max-width:860px;font-family:Georgia,serif;font-style:italic;color:var(--gold);font-size:1.1rem}
+
+  .products{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+  .product{background:var(--dark);border-top:3px solid var(--gold);padding:20px}
+  .product .name{font-weight:700;font-size:.95rem}
+  .product .desc{color:var(--mute);font-size:.82rem;margin-top:6px}
+
+  .eco{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+  .eco a.site{display:block;background:var(--panel);padding:26px;border-top:3px solid var(--gold);transition:transform .15s}
+  .eco a.site:hover{transform:translateY(-3px);text-decoration:none}
+  .eco .site h3{color:var(--cream);font-size:1.05rem}
+  .eco .site .url{color:var(--gold);font-size:.82rem;margin:4px 0 10px;display:block}
+  .eco .site p{color:var(--mute);font-size:.85rem}
+
+  .team{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+  .member{background:var(--panel);padding:22px;border-left:4px solid var(--gold)}
+  .member .name{font-family:Georgia,serif;font-weight:700;font-size:1.05rem}
+  .member .role{color:var(--gold);font-size:.78rem;margin:2px 0 10px}
+  .member p{color:var(--mute);font-size:.84rem}
+
+  .cta{background:var(--dark);border-top:4px solid var(--gold);text-align:center;padding:72px 24px}
+  .cta h2{font-size:2rem}
+  .cta p{color:var(--mute);max-width:560px;margin:14px auto 28px}
+  .btn{display:inline-block;background:var(--gold);color:var(--forest);font-weight:700;padding:14px 34px;border-radius:2px;letter-spacing:.05em}
+  .btn:hover{background:var(--gold-dim);text-decoration:none}
+
+  footer{padding:36px 24px;border-top:1px solid rgba(217,164,65,.25)}
+  footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;align-items:center}
+  footer p{color:var(--mute);font-size:.72rem;max-width:640px}
+  footer .links a{margin-left:16px;font-size:.8rem}
+  @media(max-width:640px){.nav-links{display:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="nav">
+    <div class="logo"><img src="https://www.primeoriginsatlas.org/logo.png" alt="Prime Origins"><span>PRIME ORIGINS <span style="color:var(--cream);letter-spacing:.15em">GLOBAL</span></span></div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#supply">Supply</a>
+      <a href="#products">Products</a>
+      <a href="#ecosystem">Ecosystem</a>
+      <a href="#team">Team</a>
+      <a href="#invest">Investors</a>
+    </div>
+  </nav>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <span class="label">On-chain origin · Full transparency</span>
+    <h1>California craft cannabis<br>for the hash market.</h1>
+    <p class="lead">Appellation-grade cultivation in Mendocino County, paired with authentic Moroccan hash imported through our established partners — every batch sold with verifiable provenance.</p>
+    <div class="stats">
+      <div class="stat"><div class="v">2,094 lbs</div><div class="l">first California harvest</div></div>
+      <div class="stat"><div class="v">2</div><div class="l">supply chains, one brand</div></div>
+      <div class="stat"><div class="v">100%</div><div class="l">provenance-documented</div></div>
+      <div class="stat"><div class="v">4</div><div class="l">platforms, one ecosystem</div></div>
+    </div>
+  </div>
+</div>
+
+<section id="about">
+  <div class="wrap">
+    <span class="label">What we do</span>
+    <h2>Grow it in California. Import it from Morocco. Sell it with proof.</h2>
+    <p class="sub">A premium hash house with two origins of supply.</p>
+    <div class="cards">
+      <div class="card">
+        <h3>What we are building</h3>
+        <p>A premium hash house: sun-grown, appellation-certified cannabis cultivated in Anderson Valley and processed into craft hash, rosin, flower and pre-rolls — alongside an import line of traditional Moroccan hash.</p>
+      </div>
+      <div class="card alt">
+        <h3>Why now</h3>
+        <p>Hash and solventless concentrates are the fastest-growing premium category in cannabis, and Morocco's regulated framework has opened a legal route for traditional hash for the first time.</p>
+      </div>
+      <div class="card">
+        <h3>Why we win</h3>
+        <p>Our founding team built California's cannabis appellation system. Our Moroccan partners supply heritage product no domestic competitor can copy. Provenance is documented on the Prime Origins platform.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="band">
+  <div class="wrap">
+    <p>"One brand, two origins: California craft and Moroccan heritage — both sold with full provenance documentation."</p>
+  </div>
+</div>
+
+<section id="supply">
+  <div class="wrap">
+    <span class="label">Two supply engines</span>
+    <h2>Domestic craft. Imported heritage.</h2>
+    <p class="sub">Both engines feed one premium brand.</p>
+    <div class="cards">
+      <div class="card">
+        <span class="tag">California · Cultivate</span>
+        <h3 style="color:var(--cream)">Vista Ranch, Anderson Valley</h3>
+        <ul>
+          <li>60,000 sq ft licensed canopy — full-term outdoor and hoop house</li>
+          <li>Navarro River Cannabis Appellation — certified sun-grown terroir</li>
+          <li>Regenerative methods: smart pots, engineered soil, watershed restoration</li>
+          <li>2,094 lbs bud + 837 lbs trim projected — graded into flower, rosin, hash and pre-rolls</li>
+        </ul>
+      </div>
+      <div class="card alt">
+        <span class="tag">Morocco · Import</span>
+        <h3 style="color:var(--cream)">Traditional Moroccan hash</h3>
+        <ul>
+          <li>Established partner farms operating inside Morocco's regulated framework (ANRAC)</li>
+          <li>Centuries-old craft from the world's most recognised hash origin</li>
+          <li>Documented chain of custody — COAs, batch records, export files</li>
+          <li>A heritage product line domestic competitors cannot replicate</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="products" style="padding-top:0">
+  <div class="wrap">
+    <span class="label">Product lines</span>
+    <h2>Built for the premium end of the market</h2>
+    <p class="sub">Every pound graded, every batch documented.</p>
+    <div class="products">
+      <div class="product"><div class="name">Craft Hash</div><div class="desc">Ice-water solventless hash from California smalls and trim — plus the imported Moroccan heritage line.</div></div>
+      <div class="product"><div class="name">Live Rosin & Concentrates</div><div class="desc">Solventless rosin pressed from mid-grade sun-grown flower.</div></div>
+      <div class="product"><div class="name">Appellation Flower</div><div class="desc">Quarter-ounce jars of certified Navarro River appellation flower.</div></div>
+      <div class="product"><div class="name">Pre-Rolls</div><div class="desc">Sun-grown pre-rolls at accessible price points.</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="ecosystem" style="background:var(--dark)">
+  <div class="wrap">
+    <span class="label">The Prime Origins ecosystem</span>
+    <h2>Four platforms. One mission.</h2>
+    <p class="sub">Provenance, sustainability and direct trade — connected.</p>
+    <div class="eco">
+      <a class="site" href="https://www.primeorigins.org" target="_blank" rel="noopener">
+        <h3>Prime Origins Marketplace</h3>
+        <span class="url">primeorigins.org →</span>
+        <p>The blockchain-powered marketplace where verified producers connect directly with global buyers — on-chain COAs, product passports and ESG verification.</p>
+      </a>
+      <a class="site" href="https://www.primeoriginsatlas.org" target="_blank" rel="noopener">
+        <h3>Prime Origins Atlas</h3>
+        <span class="url">primeoriginsatlas.org →</span>
+        <p>A curated marketplace for high-integrity carbon credits — registry-verified and self-verified, traceable and retirable.</p>
+      </a>
+      <a class="site" href="https://terrafi.me" target="_blank" rel="noopener">
+        <h3>TerraFi</h3>
+        <span class="url">terrafi.me →</span>
+        <p>The token powering the Prime Origins ecosystem — provenance tracking, staking incentives and trade settlement.</p>
+      </a>
+      <a class="site" href="#invest">
+        <h3>Prime Origins Global</h3>
+        <span class="url">primeoriginsglobal.org — you are here</span>
+        <p>The flagship operating business: California craft cannabis and Moroccan heritage hash, sold with verifiable provenance.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="team">
+  <div class="wrap">
+    <span class="label">Leadership</span>
+    <h2>Founders, board and technology — under one roof</h2>
+    <p class="sub">Cannabis pioneering, operations, finance and crypto-native technology.</p>
+    <div class="team">
+      <div class="member"><div class="name">Oliver Triggs</div><div class="role">Chief Executive Officer · Co-Founder</div><p>12+ years in corporate finance including BDO Corporate Finance; led land and hemp ventures across Africa. Drives strategy and the investor pipeline.</p></div>
+      <div class="member"><div class="name">Justin Calvino</div><div class="role">Partnerships, Licensing & Ops · Co-Founder</div><p>10+ years in California cannabis; founder of the Mendocino Appellations Project, co-founder of Emerald Exchange.</p></div>
+      <div class="member"><div class="name">Grant Robshaw</div><div class="role">Chief Financial Officer · Co-Founder</div><p>15+ years across Deloitte, KPMG Bermuda and Conyers. Leads financial structuring, governance and the Moroccan partner relationships.</p></div>
+      <div class="member"><div class="name">Victor Cornejo</div><div class="role">Infrastructure & Ops · Co-Founder</div><p>20+ years delivering regulated cannabis and industrial facilities — compliance, scalable manufacturing and technology-driven execution.</p></div>
+      <div class="member"><div class="name">Rene Schuster</div><div class="role">Chairman</div><p>CXO with 25+ years at KPMG, Telefónica, Vodafone, HP and Compaq; expert in turnarounds, digital transformation and growth.</p></div>
+      <div class="member"><div class="name">Patrick Hale</div><div class="role">Chief Technology Officer</div><p>Crypto native — launched his first blockchain venture at Stanford, advised global brands and delivered multiple nine-figure tokens. CEO of DreamTech Consulting.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="cta" id="invest">
+  <span class="label">For investors</span>
+  <h2>We are raising $5.0M to build a two-origin premium hash brand.</h2>
+  <p>Investor deck, executive summary and data room available on request for professional and qualified investors.</p>
+  <a class="btn" href="mailto:oliver@primeorigins.org?subject=Prime%20Origins%20Global%20—%20Investor%20Enquiry">Request the Deck</a>
+</div>
+
+<footer>
+  <div class="wrap">
+    <p>© 2026 Prime Origins. All rights reserved. For professional / qualified investors only. Nothing on this page constitutes an offer of securities; illustrative projections are subject to diligence and definitive documentation. Cannabis products are sold only through licensed channels where legally permitted.</p>
+    <div class="links">
+      <a href="https://www.primeorigins.org" target="_blank" rel="noopener">Marketplace</a>
+      <a href="https://www.primeoriginsatlas.org" target="_blank" rel="noopener">Atlas</a>
+      <a href="https://terrafi.me" target="_blank" rel="noopener">TerraFi</a>
+      <a href="https://www.linkedin.com/company/primeorigins" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
