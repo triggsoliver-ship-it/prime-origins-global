@@ -77,6 +77,7 @@
   ::selection{background:var(--gold);color:var(--forest)}
   h1,h2,h3,.serif{font-family:'Fraunces',Georgia,serif;font-weight:600}
   a{color:var(--gold);text-decoration:none}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
   .wrap{max-width:var(--max);margin:0 auto;padding:0 28px}
 
   /* grain overlay */
@@ -96,8 +97,8 @@
     position:fixed;top:0;left:0;right:0;z-index:100;
     transition:background .35s,box-shadow .35s;
   }
-  header.scrolled{background:rgba(12,24,18,.88);backdrop-filter:blur(14px);box-shadow:0 1px 0 rgba(217,164,65,.18)}
-  .nav{display:flex;align-items:center;justify-content:space-between;padding:20px 28px;max-width:var(--max);margin:0 auto}
+  header.scrolled,header.menu-open{background:rgba(12,24,18,.92);backdrop-filter:blur(14px);box-shadow:0 1px 0 rgba(217,164,65,.18)}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:20px 28px;max-width:var(--max);margin:0 auto;position:relative}
   .logo{display:flex;align-items:center;gap:12px;font-weight:600;letter-spacing:.28em;font-size:.85rem;color:var(--gold)}
   .logo img{height:34px;width:auto;mix-blend-mode:screen;filter:drop-shadow(0 0 12px rgba(217,164,65,.35))}
   .logo .global{color:var(--cream);letter-spacing:.18em;font-weight:300}
@@ -109,6 +110,10 @@
   .nav-cta{border:1px solid rgba(217,164,65,.5);padding:9px 22px;border-radius:100px;color:var(--gold)!important;transition:all .3s}
   .nav-cta:hover{background:var(--gold);color:var(--forest)!important;box-shadow:0 0 24px rgba(217,164,65,.4)}
   .nav-cta::after{display:none}
+  .menu-btn{
+    display:none;width:44px;height:44px;align-items:center;justify-content:center;
+    background:none;border:0;color:var(--gold);cursor:pointer;
+  }
 
   /* ============ HERO ============ */
   .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;position:relative;padding:140px 0 80px;overflow:hidden}
@@ -268,7 +273,29 @@
   footer p{color:#5C6B60;font-size:.7rem;max-width:620px;line-height:1.6}
   footer .links a{margin-left:20px;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);transition:color .25s}
   footer .links a:hover{color:var(--gold)}
-  @media(max-width:760px){.nav-links{display:none}}
+  @media(max-width:760px){
+    .nav-links{
+      display:none;position:absolute;top:100%;left:0;right:0;
+      flex-direction:column;align-items:flex-start;gap:4px;
+      background:rgba(12,24,18,.97);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+      border-bottom:1px solid rgba(217,164,65,.25);
+      padding:18px 28px 26px;
+    }
+    .nav-links a{width:100%;padding:12px 0;font-size:.9rem}
+    .nav-links a::after{display:none}
+    .nav-cta{margin-top:10px;text-align:center}
+    header.menu-open .nav-links{display:flex}
+    .menu-btn{display:inline-flex}
+    footer .links a{margin-left:0;margin-right:20px}
+  }
+
+  /* reduced motion */
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{animation:none !important;transition:none !important}
+    .rv{opacity:1;transform:none}
+    .marquee-track{animation:none}
+  }
 </style>
 </head>
 <body>
@@ -279,7 +306,7 @@
       <img src="https://www.primeoriginsatlas.org/logo.png" alt="Prime Origins">
       <span>PRIME ORIGINS <span class="global">GLOBAL</span></span>
     </div>
-    <div class="nav-links">
+    <div class="nav-links" id="navLinks">
       <a href="#about">About</a>
       <a href="#supply">Supply</a>
       <a href="#products">Products</a>
@@ -287,6 +314,9 @@
       <a href="#team">Team</a>
       <a class="nav-cta" href="#invest">Investors</a>
     </div>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
   </nav>
 </header>
 
@@ -459,6 +489,18 @@
 <script>
   const hdr = document.getElementById('hdr');
   addEventListener('scroll', () => hdr.classList.toggle('scrolled', scrollY > 40), {passive:true});
+
+  // Mobile menu toggle
+  const menuBtn = document.getElementById('menuBtn');
+  menuBtn.addEventListener('click', () => {
+    const open = hdr.classList.toggle('menu-open');
+    menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  });
+  document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => {
+    hdr.classList.remove('menu-open');
+    menuBtn.setAttribute('aria-expanded', 'false');
+  }));
 
   const io = new IntersectionObserver(es => es.forEach(e => {
     if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
