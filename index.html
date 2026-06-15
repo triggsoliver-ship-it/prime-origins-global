@@ -60,7 +60,10 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Inter:wght@300;400;500;600;700&display=swap">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://www.primeoriginsatlas.org" crossorigin>
+<link rel="preload" as="image" href="https://www.primeoriginsatlas.org/logo.png">
 <style>
   :root{
     --forest:#0C1812; --forest2:#13221A; --panel:#16271E; --panel2:#1C3127;
@@ -289,21 +292,63 @@
     footer .links a{margin-left:0;margin-right:20px}
   }
 
+  /* scroll progress bar */
+  .progress{position:fixed;top:0;left:0;height:2px;width:0;z-index:200;
+    background:linear-gradient(90deg,var(--gold),var(--gold-bright));
+    box-shadow:0 0 12px rgba(217,164,65,.5);transition:width .1s linear}
+
+  /* active nav link (scroll-spy) */
+  .nav-links a.active{color:var(--cream)}
+  .nav-links a.active::after{width:100%}
+
+  /* skip link */
+  .skip{position:absolute;left:-999px;top:0;z-index:300;background:var(--gold);color:var(--forest);
+    padding:10px 18px;border-radius:0 0 8px 0;font-size:.8rem;font-weight:600;letter-spacing:.06em}
+  .skip:focus{left:0}
+
+  /* button arrow micro-interaction */
+  .btn .arr{display:inline-block;transition:transform .3s}
+  .btn:hover .arr{transform:translateX(4px)}
+
+  /* hero accent line above eyebrow */
+  .hero .label{margin-bottom:4px}
+  .hero p.lead{line-height:1.65}
+
+  /* trust row under hero CTAs */
+  .trust{display:flex;flex-wrap:wrap;gap:10px 28px;margin-top:34px;align-items:center}
+  .trust .ti{display:inline-flex;align-items:center;gap:9px;color:var(--mute);
+    font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;font-weight:500}
+  .trust .ti svg{color:var(--gold);flex:0 0 auto}
+
+  /* back to top */
+  .totop{position:fixed;right:22px;bottom:22px;z-index:120;width:46px;height:46px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;cursor:pointer;
+    background:rgba(12,24,18,.78);backdrop-filter:blur(10px);
+    border:1px solid rgba(217,164,65,.4);color:var(--gold);
+    opacity:0;visibility:hidden;transform:translateY(12px);
+    transition:opacity .35s,transform .35s,visibility .35s,background .3s,box-shadow .3s}
+  .totop.show{opacity:1;visibility:visible;transform:none}
+  .totop:hover{background:var(--gold);color:var(--forest);box-shadow:0 8px 24px rgba(217,164,65,.4)}
+
   /* reduced motion */
   @media (prefers-reduced-motion: reduce){
     html{scroll-behavior:auto}
     *,*::before,*::after{animation:none !important;transition:none !important}
     .rv{opacity:1;transform:none}
     .marquee-track{animation:none}
+    .totop.show{transform:none}
   }
 </style>
 </head>
 <body>
 
+<a class="skip" href="#about">Skip to content</a>
+<div class="progress" id="progress" aria-hidden="true"></div>
+
 <header id="hdr">
   <nav class="nav">
     <div class="logo">
-      <img src="https://www.primeoriginsatlas.org/logo.png" alt="Prime Origins">
+      <img src="https://www.primeoriginsatlas.org/logo.png" alt="Prime Origins" width="34" height="34" decoding="async" fetchpriority="high">
       <span>PRIME ORIGINS <span class="global">GLOBAL</span></span>
     </div>
     <div class="nav-links" id="navLinks">
@@ -327,8 +372,13 @@
     <h1 class="rv in">California craft cannabis<br>for the <span class="gold-it">hash market.</span></h1>
     <p class="lead rv in d1">Appellation-grade cultivation in Mendocino County, paired with authentic Moroccan hash imported through our established partners — every batch sold with verifiable provenance.</p>
     <div class="hero-ctas rv in d2">
-      <a class="btn primary" href="#invest">Partner With Us</a>
-      <a class="btn ghost" href="#ecosystem">Explore the Ecosystem</a>
+      <a class="btn primary" href="#invest">Partner With Us <span class="arr" aria-hidden="true">&rarr;</span></a>
+      <a class="btn ghost" href="#ecosystem">Explore the Ecosystem <span class="arr" aria-hidden="true">&rarr;</span></a>
+    </div>
+    <div class="trust rv in d2" aria-label="Highlights">
+      <span class="ti"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.5 8 8 11 4.5-3 8-6 8-11V5z"/><path d="m9 12 2 2 4-4"/></svg>Appellation certified</span>
+      <span class="ti"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v20M2 12h20"/><circle cx="12" cy="12" r="10"/></svg>Two origins, one brand</span>
+      <span class="ti"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Verifiable provenance</span>
     </div>
     <div class="stats rv in d3">
       <div class="stat"><div class="v" data-count="2094">0</div><div class="l">lbs — first California harvest</div></div>
@@ -337,7 +387,7 @@
       <div class="stat"><div class="v" data-count="4">0</div><div class="l">platforms, one ecosystem</div></div>
     </div>
   </div>
-  <div class="scroll-hint">Scroll</div>
+  <a class="scroll-hint" href="#about" aria-label="Scroll to content">Scroll</a>
 </div>
 
 <div class="marquee">
@@ -471,8 +521,12 @@
   <span class="label rv" style="justify-content:center">For investors & partners</span>
   <h2 class="rv">Own a piece of the <em>provenance revolution</em> in cannabis.</h2>
   <p class="rv d1">We are partnering with a select group of professional investors to scale a two-origin premium hash brand. Investor deck, executive summary and data room available on request.</p>
-  <a class="btn primary rv d2" href="mailto:oliver@primeorigins.org?subject=Prime%20Origins%20Global%20—%20Investor%20Enquiry">Request the Deck</a>
+  <a class="btn primary rv d2" href="mailto:oliver@primeorigins.org?subject=Prime%20Origins%20Global%20—%20Investor%20Enquiry">Request the Deck <span class="arr" aria-hidden="true">&rarr;</span></a>
 </div>
+
+<button class="totop" id="totop" aria-label="Back to top">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
 
 <footer>
   <div class="wrap">
@@ -520,6 +574,41 @@
     cio.unobserve(el);
   }), {threshold:.6});
   document.querySelectorAll('[data-count]').forEach(el => cio.observe(el));
+
+  // Scroll progress bar + back-to-top visibility
+  const bar = document.getElementById('progress');
+  const toTop = document.getElementById('totop');
+  const onScroll = () => {
+    const h = document.documentElement;
+    const max = h.scrollHeight - h.clientHeight;
+    bar.style.width = (max > 0 ? (scrollY / max) * 100 : 0) + '%';
+    toTop.classList.toggle('show', scrollY > 600);
+  };
+  addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+  toTop.addEventListener('click', () => {
+    const smooth = !matchMedia('(prefers-reduced-motion: reduce)').matches;
+    scrollTo({top:0, behavior: smooth ? 'smooth' : 'auto'});
+  });
+
+  // Scroll-spy: highlight the nav link for the section in view
+  const navMap = {};
+  document.querySelectorAll('.nav-links a[href^="#"]').forEach(a => {
+    const id = a.getAttribute('href').slice(1);
+    if (id) navMap[id] = a;
+  });
+  const spy = new IntersectionObserver(es => es.forEach(e => {
+    const a = navMap[e.target.id];
+    if (!a) return;
+    if (e.isIntersecting) {
+      Object.values(navMap).forEach(l => l.classList.remove('active'));
+      a.classList.add('active');
+    }
+  }), {rootMargin:'-45% 0px -50% 0px', threshold:0});
+  ['about','supply','products','ecosystem','team','invest'].forEach(id => {
+    const sec = document.getElementById(id);
+    if (sec) spy.observe(sec);
+  });
 </script>
 </body>
 </html>
