@@ -261,6 +261,41 @@
   .member .role{color:var(--gold);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;margin:6px 0 14px;font-weight:600}
   .member p{color:var(--mute);font-size:.85rem}
 
+  /* ============ PARTNER ============ */
+  #partner{background:linear-gradient(180deg,var(--forest) 0%,#0A1410 55%,var(--forest) 100%)}
+  .partner-grid{display:grid;grid-template-columns:0.9fr 1.1fr;gap:48px;align-items:start}
+  @media(max-width:860px){.partner-grid{grid-template-columns:1fr;gap:36px}}
+  .partner-intro ul{list-style:none;margin-top:24px}
+  .partner-intro li{margin-bottom:16px;padding-left:26px;position:relative;color:var(--mute);font-size:.95rem}
+  .partner-intro li::before{content:"◆";position:absolute;left:0;top:3px;color:var(--gold);font-size:.55rem}
+  .partner-intro li b{color:var(--cream);font-weight:500}
+  .partner-form{
+    background:linear-gradient(160deg,var(--panel),var(--forest2));
+    border:1px solid rgba(217,164,65,.2);border-radius:8px;padding:40px 34px;position:relative;overflow:hidden;
+  }
+  .partner-form::before{content:"";position:absolute;top:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,var(--gold),transparent 70%)}
+  .field{margin-bottom:20px}
+  .field label{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:9px}
+  .field input,.field select,.field textarea{
+    width:100%;background:rgba(12,24,18,.6);border:1px solid rgba(217,164,65,.22);border-radius:5px;
+    color:var(--cream);font-family:'Inter',sans-serif;font-size:.95rem;font-weight:300;padding:13px 15px;
+    transition:border-color .25s,box-shadow .25s;
+  }
+  .field textarea{resize:vertical;min-height:110px;line-height:1.6}
+  .field select{appearance:none;cursor:pointer;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23D9A441' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:right 15px center;padding-right:42px;
+  }
+  .field input::placeholder,.field textarea::placeholder{color:#5C6B60}
+  .field input:focus,.field select:focus,.field textarea:focus{
+    outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(217,164,65,.12);
+  }
+  .field-row{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:520px){.field-row{grid-template-columns:1fr}}
+  .partner-form .btn{width:100%;justify-content:center;border:0;cursor:pointer;margin-top:4px}
+  .form-note{font-size:.74rem;color:var(--mute);margin-top:16px;text-align:center;line-height:1.6}
+  .form-note a{color:var(--gold)}
+
   /* CTA */
   .cta{
     text-align:center;padding:140px 28px;position:relative;overflow:hidden;
@@ -357,6 +392,7 @@
       <a href="#products">Products</a>
       <a href="#ecosystem">Ecosystem</a>
       <a href="#team">Team</a>
+      <a href="#partner">Partner</a>
       <a class="nav-cta" href="#invest">Investors</a>
     </div>
     <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
@@ -372,7 +408,7 @@
     <h1 class="rv in">California craft cannabis<br>for the <span class="gold-it">hash market.</span></h1>
     <p class="lead rv in d1">Appellation-grade cultivation in Mendocino County, paired with authentic Moroccan hash imported through our established partners — every batch sold with verifiable provenance.</p>
     <div class="hero-ctas rv in d2">
-      <a class="btn primary" href="#invest">Partner With Us <span class="arr" aria-hidden="true">&rarr;</span></a>
+      <a class="btn primary" href="#partner">Partner With Us <span class="arr" aria-hidden="true">&rarr;</span></a>
       <a class="btn ghost" href="#ecosystem">Explore the Ecosystem <span class="arr" aria-hidden="true">&rarr;</span></a>
     </div>
     <div class="trust rv in d2" aria-label="Highlights">
@@ -517,8 +553,64 @@
   </div>
 </section>
 
+<section id="partner">
+  <div class="wrap">
+    <span class="label rv">Partner with us</span>
+    <h2 class="rv">Build the provenance economy <span class="gold-em">with us.</span></h2>
+    <p class="sub rv">Cultivators, distributors, importers, brands and technology partners — let's talk.</p>
+    <div class="partner-grid">
+      <div class="partner-intro rv">
+        <p style="color:var(--mute)">Prime Origins is expanding its two-origin supply network and the platforms that power it. If your business touches any part of the chain, we want to hear from you.</p>
+        <ul>
+          <li><b>Supply &amp; cultivation</b> — licensed growers and processors of craft cannabis and hash.</li>
+          <li><b>Distribution &amp; retail</b> — licensed channels for premium flower, rosin and hash.</li>
+          <li><b>Import / export</b> — regulated Moroccan and international supply partners.</li>
+          <li><b>Brand &amp; licensing</b> — co-branding, white-label and licensing opportunities.</li>
+          <li><b>Technology &amp; provenance</b> — blockchain, traceability and ESG verification.</li>
+        </ul>
+        <p style="color:var(--mute);margin-top:22px">Prefer email? Reach us directly at <a href="mailto:oliver@primeorigins.org">oliver@primeorigins.org</a>.</p>
+      </div>
+      <form class="partner-form rv d1" id="partnerForm" novalidate>
+        <div class="field-row">
+          <div class="field">
+            <label for="pf-name">Your name</label>
+            <input type="text" id="pf-name" name="name" placeholder="Jane Doe" required autocomplete="name">
+          </div>
+          <div class="field">
+            <label for="pf-org">Company / organisation</label>
+            <input type="text" id="pf-org" name="org" placeholder="Acme Cannabis Co." autocomplete="organization">
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="pf-email">Email</label>
+            <input type="email" id="pf-email" name="email" placeholder="you@company.com" required autocomplete="email">
+          </div>
+          <div class="field">
+            <label for="pf-type">Partnership type</label>
+            <select id="pf-type" name="type">
+              <option value="Supply &amp; Cultivation">Supply &amp; Cultivation</option>
+              <option value="Distribution &amp; Retail">Distribution &amp; Retail</option>
+              <option value="Import / Export">Import / Export</option>
+              <option value="Brand &amp; Licensing">Brand &amp; Licensing</option>
+              <option value="Technology &amp; Provenance">Technology &amp; Provenance</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="pf-message">How would you like to partner?</label>
+          <textarea id="pf-message" name="message" placeholder="Tell us a little about your business and what you have in mind…" required></textarea>
+        </div>
+        <button type="submit" class="btn primary">Send Partnership Enquiry <span class="arr" aria-hidden="true">&rarr;</span></button>
+        <p class="form-note" id="pf-note">This opens your email app with the message ready to send to <a href="mailto:oliver@primeorigins.org">oliver@primeorigins.org</a>.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
 <div class="cta" id="invest">
-  <span class="label rv" style="justify-content:center">For investors & partners</span>
+  <span class="label rv" style="justify-content:center">For investors &amp; partners</span>
   <h2 class="rv">Own a piece of the <em>provenance revolution</em> in cannabis.</h2>
   <p class="rv d1">We are partnering with a select group of professional investors to scale a two-origin premium hash brand. Investor deck, executive summary and data room available on request.</p>
   <a class="btn primary rv d2" href="mailto:oliver@primeorigins.org?subject=Prime%20Origins%20Global%20—%20Investor%20Enquiry">Request the Deck <span class="arr" aria-hidden="true">&rarr;</span></a>
@@ -575,6 +667,41 @@
   }), {threshold:.6});
   document.querySelectorAll('[data-count]').forEach(el => cio.observe(el));
 
+  // Partner form -> compose a pre-filled email to Prime Origins
+  const partnerForm = document.getElementById('partnerForm');
+  if (partnerForm) {
+    partnerForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const val = id => (document.getElementById(id).value || '').trim();
+      const name = val('pf-name'), org = val('pf-org'), email = val('pf-email');
+      const type = document.getElementById('pf-type').value, message = val('pf-message');
+
+      if (!name || !email || !message) {
+        const note = document.getElementById('pf-note');
+        note.textContent = 'Please add your name, email and a short message before sending.';
+        note.style.color = '#F2C566';
+        return;
+      }
+
+      const subject = 'Partnership enquiry — ' + type + (name ? ' (' + name + ')' : '');
+      const bodyLines = [
+        'Name: ' + name,
+        'Company / organisation: ' + (org || '—'),
+        'Email: ' + email,
+        'Partnership type: ' + type,
+        '',
+        'Message:',
+        message,
+        '',
+        '— Sent from primeoriginsglobal.org'
+      ];
+      const href = 'mailto:oliver@primeorigins.org'
+        + '?subject=' + encodeURIComponent(subject)
+        + '&body=' + encodeURIComponent(bodyLines.join('\n'));
+      window.location.href = href;
+    });
+  }
+
   // Scroll progress bar + back-to-top visibility
   const bar = document.getElementById('progress');
   const toTop = document.getElementById('totop');
@@ -605,7 +732,7 @@
       a.classList.add('active');
     }
   }), {rootMargin:'-45% 0px -50% 0px', threshold:0});
-  ['about','supply','products','ecosystem','team','invest'].forEach(id => {
+  ['about','supply','products','ecosystem','team','partner','invest'].forEach(id => {
     const sec = document.getElementById(id);
     if (sec) spy.observe(sec);
   });
