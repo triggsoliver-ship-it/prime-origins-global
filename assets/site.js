@@ -45,9 +45,10 @@
       + '.cc-decline:hover{border-color:#D9A441;color:#D9A441}'
       + '.cc-accept{background:linear-gradient(100deg,#B3863A,#D9A441);color:#0C1812}'
       + '.cc-accept:hover{transform:translateY(-1px)}'
-      + '.cc-foot{display:inline-flex;gap:16px;flex-wrap:wrap;align-items:center}'
-      + '.cc-settings-link{color:inherit;text-decoration:underline;cursor:pointer;opacity:.85}'
-      + '.cc-settings-link:hover{color:#D9A441;opacity:1}'
+      + '.foot-top.foot-4{grid-template-columns:1.6fr repeat(3,1fr)}'
+      + '.fcol a[data-cookie-settings]{cursor:pointer}'
+      + '@media(max-width:900px){.foot-top.foot-4{grid-template-columns:1fr 1fr}}'
+      + '@media(max-width:760px){.foot-top.foot-4{grid-template-columns:1fr}}'
       + '@media(max-width:560px){.cc-banner{flex-direction:column;align-items:stretch}.cc-actions{justify-content:flex-end}}';
     var st = document.createElement('style'); st.id = 'cc-style'; st.textContent = css; document.head.appendChild(st);
   }
@@ -72,21 +73,31 @@
     b.querySelector('.cc-decline').addEventListener('click', function(){ close('denied'); });
   }
 
-  function addFooterLinks(){
-    var foot = document.querySelector('.foot-base');
-    if(!foot || foot.querySelector('[data-cookie-settings]')) return;
+  function addFooterLegal(){
+    var footTop = document.querySelector('.foot-top');
+    if(!footTop) return;
     injectStyles();
-    var hasPolicy = !!document.querySelector('footer a[href="privacy.html"]');
-    var wrap = document.createElement('span');
-    wrap.className = 'cc-foot';
-    var html = '';
-    if(!hasPolicy){
-      html += '<a class="cc-settings-link" href="privacy.html">Privacy</a>'
-            + '<a class="cc-settings-link" href="cookies.html">Cookie Policy</a>';
+    var existing = footTop.querySelector('a[href="privacy.html"]');
+    if(existing){
+      // Page already ships a static Legal column (e.g. privacy/cookies pages):
+      // just make sure a Cookie-settings control is present.
+      var col = existing.parentNode;
+      if(col && !col.querySelector('[data-cookie-settings]')){
+        var link = document.createElement('a');
+        link.href = '#'; link.setAttribute('data-cookie-settings',''); link.textContent = 'Cookie settings';
+        col.appendChild(link);
+      }
+      return;
     }
-    html += '<a class="cc-settings-link" href="#" data-cookie-settings>Cookie settings</a>';
-    wrap.innerHTML = html;
-    foot.appendChild(wrap);
+    // Content pages: add a full Legal column.
+    var legal = document.createElement('div');
+    legal.className = 'fcol';
+    legal.innerHTML = '<h5>Legal</h5>'
+      + '<a href="privacy.html">Privacy Policy</a>'
+      + '<a href="cookies.html">Cookie Policy</a>'
+      + '<a href="#" data-cookie-settings>Cookie settings</a>';
+    footTop.appendChild(legal);
+    footTop.classList.add('foot-4');
   }
 
   document.addEventListener('click', function(e){
@@ -95,7 +106,7 @@
   });
 
   function init(){
-    addFooterLinks();
+    addFooterLegal();
     if(choice !== 'granted' && choice !== 'denied') showBanner();
   }
   if(document.body) init(); else document.addEventListener('DOMContentLoaded', init);
