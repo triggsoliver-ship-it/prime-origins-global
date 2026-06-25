@@ -1,18 +1,61 @@
 /* Prime Origins Global — shared interactions */
 
-/* ---------- Google Analytics (GA4) ---------- */
-/* Loaded here so every page that includes site.js is tracked, with no per-page edits. */
+/* ---------- Cookie consent + Google Analytics (GA4) ---------- */
+/* GDPR/PECR: GA4 only loads after the visitor accepts. Default = no tracking. */
 (function(){
   var GA_ID = 'G-5WYFJ3NZJE';
-  var s = document.createElement('script');
-  s.async = true;
-  s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
-  document.head.appendChild(s);
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){ dataLayer.push(arguments); }
-  window.gtag = gtag;
-  gtag('js', new Date());
-  gtag('config', GA_ID);
+  var KEY = 'po-consent';
+
+  function loadGA(){
+    if(window.__gaLoaded) return; window.__gaLoaded = true;
+    var s = document.createElement('script');
+    s.async = true; s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+    document.head.appendChild(s);
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    window.gtag = gtag;
+    gtag('js', new Date());
+    gtag('config', GA_ID, { anonymize_ip: true });
+  }
+
+  function showBanner(){
+    var css = '.cc-banner{position:fixed;left:16px;right:16px;bottom:16px;z-index:1200;max-width:720px;margin:0 auto;background:rgba(12,24,18,.97);backdrop-filter:blur(12px);border:1px solid rgba(217,164,65,.32);border-radius:12px;padding:18px 20px;display:flex;gap:14px 18px;align-items:center;flex-wrap:wrap;justify-content:space-between;box-shadow:0 20px 50px rgba(0,0,0,.5);transform:translateY(160%);transition:transform .45s cubic-bezier(.2,.6,.2,1)}'
+      + '.cc-banner.cc-in{transform:none}'
+      + '.cc-text{color:#E6E0D2;font-size:.84rem;line-height:1.55;flex:1 1 320px;margin:0}'
+      + '.cc-actions{display:flex;gap:10px;flex:0 0 auto}'
+      + '.cc-btn{font:inherit;font-size:.76rem;font-weight:600;letter-spacing:.04em;padding:10px 22px;border-radius:100px;cursor:pointer;border:1px solid transparent;transition:all .25s}'
+      + '.cc-decline{background:transparent;border-color:rgba(244,239,226,.3);color:#F4EFE2}'
+      + '.cc-decline:hover{border-color:#D9A441;color:#D9A441}'
+      + '.cc-accept{background:linear-gradient(100deg,#B3863A,#D9A441);color:#0C1812}'
+      + '.cc-accept:hover{transform:translateY(-1px)}'
+      + '@media(max-width:560px){.cc-banner{flex-direction:column;align-items:stretch}.cc-actions{justify-content:flex-end}}';
+    var st = document.createElement('style'); st.textContent = css; document.head.appendChild(st);
+
+    var b = document.createElement('div');
+    b.className = 'cc-banner'; b.setAttribute('role','dialog'); b.setAttribute('aria-label','Cookie consent');
+    b.innerHTML = '<p class="cc-text">We use cookies to measure traffic and improve your experience. Analytics only runs if you accept.</p>'
+      + '<div class="cc-actions">'
+      + '<button class="cc-btn cc-decline" type="button">Decline</button>'
+      + '<button class="cc-btn cc-accept" type="button">Accept</button>'
+      + '</div>';
+    document.body.appendChild(b);
+    requestAnimationFrame(function(){ b.classList.add('cc-in'); });
+    function choose(v){
+      try{ localStorage.setItem(KEY, v); }catch(e){}
+      b.classList.remove('cc-in');
+      setTimeout(function(){ if(b.parentNode) b.parentNode.removeChild(b); }, 400);
+      if(v === 'granted') loadGA();
+    }
+    b.querySelector('.cc-accept').addEventListener('click', function(){ choose('granted'); });
+    b.querySelector('.cc-decline').addEventListener('click', function(){ choose('denied'); });
+  }
+
+  var choice = null;
+  try{ choice = localStorage.getItem(KEY); }catch(e){}
+  if(choice === 'granted'){ loadGA(); }
+  else if(choice !== 'denied'){
+    if(document.body){ showBanner(); } else { document.addEventListener('DOMContentLoaded', showBanner); }
+  }
 })();
 
 (function(){
