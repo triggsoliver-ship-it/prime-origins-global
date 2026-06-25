@@ -1,4 +1,20 @@
 /* Prime Origins Global — shared interactions */
+
+/* ---------- Google Analytics (GA4) ---------- */
+/* Loaded here so every page that includes site.js is tracked, with no per-page edits. */
+(function(){
+  var GA_ID = 'G-5WYFJ3NZJE';
+  var s = document.createElement('script');
+  s.async = true;
+  s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+  document.head.appendChild(s);
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  window.gtag = gtag;
+  gtag('js', new Date());
+  gtag('config', GA_ID);
+})();
+
 (function(){
   var hdr = document.getElementById('hdr');
   var bar = document.getElementById('progress');
