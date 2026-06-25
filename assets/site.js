@@ -1,4 +1,117 @@
 /* Prime Origins Global — shared interactions */
+
+/* ---------- Cookie consent + Google Analytics (GA4, Consent Mode v2) ---------- */
+/* GDPR/PECR: storage denied by default; granted only after the visitor accepts.
+   Any [data-cookie-settings] element (e.g. the footer link) reopens the banner. */
+(function(){
+  var GA_ID = 'G-5WYFJ3NZJE';
+  var KEY = 'po-consent';
+
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  window.gtag = gtag;
+
+  var choice = null;
+  try{ choice = localStorage.getItem(KEY); }catch(e){}
+
+  gtag('consent', 'default', {
+    ad_storage: 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
+    analytics_storage: (choice === 'granted') ? 'granted' : 'denied',
+    wait_for_update: 500
+  });
+
+  var s = document.createElement('script');
+  s.async = true; s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+  document.head.appendChild(s);
+  gtag('js', new Date());
+  gtag('config', GA_ID, { anonymize_ip: true });
+
+  function setConsent(v){
+    try{ localStorage.setItem(KEY, v); }catch(e){}
+    gtag('consent', 'update', { analytics_storage: (v === 'granted') ? 'granted' : 'denied' });
+  }
+
+  function injectStyles(){
+    if(document.getElementById('cc-style')) return;
+    var css = '.cc-banner{position:fixed;left:16px;right:16px;bottom:16px;z-index:1200;max-width:720px;margin:0 auto;background:rgba(12,24,18,.97);backdrop-filter:blur(12px);border:1px solid rgba(217,164,65,.32);border-radius:12px;padding:18px 20px;display:flex;gap:14px 18px;align-items:center;flex-wrap:wrap;justify-content:space-between;box-shadow:0 20px 50px rgba(0,0,0,.5);transform:translateY(160%);transition:transform .45s cubic-bezier(.2,.6,.2,1)}'
+      + '.cc-banner.cc-in{transform:none}'
+      + '.cc-text{color:#E6E0D2;font-size:.84rem;line-height:1.55;flex:1 1 320px;margin:0}'
+      + '.cc-text a.cc-policy{color:#D9A441;text-decoration:underline}'
+      + '.cc-actions{display:flex;gap:10px;flex:0 0 auto}'
+      + '.cc-btn{font:inherit;font-size:.76rem;font-weight:600;letter-spacing:.04em;padding:10px 22px;border-radius:100px;cursor:pointer;border:1px solid transparent;transition:all .25s}'
+      + '.cc-decline{background:transparent;border-color:rgba(244,239,226,.3);color:#F4EFE2}'
+      + '.cc-decline:hover{border-color:#D9A441;color:#D9A441}'
+      + '.cc-accept{background:linear-gradient(100deg,#B3863A,#D9A441);color:#0C1812}'
+      + '.cc-accept:hover{transform:translateY(-1px)}'
+      + '.foot-top.foot-4{grid-template-columns:1.6fr repeat(3,1fr)}'
+      + '.fcol a[data-cookie-settings]{cursor:pointer}'
+      + '@media(max-width:900px){.foot-top.foot-4{grid-template-columns:1fr 1fr}}'
+      + '@media(max-width:760px){.foot-top.foot-4{grid-template-columns:1fr}}'
+      + '@media(max-width:560px){.cc-banner{flex-direction:column;align-items:stretch}.cc-actions{justify-content:flex-end}}';
+    var st = document.createElement('style'); st.id = 'cc-style'; st.textContent = css; document.head.appendChild(st);
+  }
+
+  var bannerEl = null;
+  function showBanner(){
+    injectStyles();
+    if(bannerEl) return;
+    var b = document.createElement('div');
+    b.className = 'cc-banner'; b.setAttribute('role','dialog'); b.setAttribute('aria-label','Cookie consent');
+    b.innerHTML = '<p class="cc-text">We use cookies to measure traffic and improve your experience. Analytics only runs if you accept. <a class="cc-policy" href="cookies.html">Cookie policy</a>.</p>'
+      + '<div class="cc-actions"><button class="cc-btn cc-decline" type="button">Decline</button><button class="cc-btn cc-accept" type="button">Accept</button></div>';
+    document.body.appendChild(b);
+    bannerEl = b;
+    requestAnimationFrame(function(){ b.classList.add('cc-in'); });
+    function close(v){
+      setConsent(v);
+      b.classList.remove('cc-in');
+      setTimeout(function(){ if(b.parentNode) b.parentNode.removeChild(b); bannerEl = null; }, 400);
+    }
+    b.querySelector('.cc-accept').addEventListener('click', function(){ close('granted'); });
+    b.querySelector('.cc-decline').addEventListener('click', function(){ close('denied'); });
+  }
+
+  function addFooterLegal(){
+    var footTop = document.querySelector('.foot-top');
+    if(!footTop) return;
+    injectStyles();
+    var existing = footTop.querySelector('a[href="privacy.html"]');
+    if(existing){
+      // Page already ships a static Legal column (e.g. privacy/cookies pages):
+      // just make sure a Cookie-settings control is present.
+      var col = existing.parentNode;
+      if(col && !col.querySelector('[data-cookie-settings]')){
+        var link = document.createElement('a');
+        link.href = '#'; link.setAttribute('data-cookie-settings',''); link.textContent = 'Cookie settings';
+        col.appendChild(link);
+      }
+      return;
+    }
+    // Content pages: add a full Legal column.
+    var legal = document.createElement('div');
+    legal.className = 'fcol';
+    legal.innerHTML = '<h5>Legal</h5>'
+      + '<a href="privacy.html">Privacy Policy</a>'
+      + '<a href="cookies.html">Cookie Policy</a>'
+      + '<a href="#" data-cookie-settings>Cookie settings</a>';
+    footTop.appendChild(legal);
+    footTop.classList.add('foot-4');
+  }
+
+  document.addEventListener('click', function(e){
+    var t = (e.target && e.target.closest) ? e.target.closest('[data-cookie-settings]') : null;
+    if(t){ e.preventDefault(); showBanner(); }
+  });
+
+  function init(){
+    addFooterLegal();
+    if(choice !== 'granted' && choice !== 'denied') showBanner();
+  }
+  if(document.body) init(); else document.addEventListener('DOMContentLoaded', init);
+})();
+
 (function(){
   var hdr = document.getElementById('hdr');
   var bar = document.getElementById('progress');
