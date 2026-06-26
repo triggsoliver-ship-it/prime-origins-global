@@ -113,3 +113,73 @@
     });
   }
 })();
+
+/* Prime Origins Global — PWA: manifest, home-screen icon & install prompt */
+(function(){
+  var head = document.head;
+  function has(sel){ return !!head.querySelector(sel); }
+  function addMeta(name, content){ if(has('meta[name="'+name+'"]')) return; var m=document.createElement('meta'); m.name=name; m.content=content; head.appendChild(m); }
+
+  if(!has('link[rel="manifest"]')){ var l=document.createElement('link'); l.rel='manifest'; l.href='/manifest.webmanifest'; head.appendChild(l); }
+  if(!has('meta[name="theme-color"]')){ addMeta('theme-color', '#0c1a14'); }
+  addMeta('mobile-web-app-capable', 'yes');
+  addMeta('apple-mobile-web-app-capable', 'yes');
+  addMeta('apple-mobile-web-app-status-bar-style', 'black-translucent');
+  addMeta('apple-mobile-web-app-title', 'Prime Origins');
+  if(!has('link[rel="apple-touch-icon"]')){ var a=document.createElement('link'); a.rel='apple-touch-icon'; a.href='https://www.primeoriginsatlas.org/logo.png'; head.appendChild(a); }
+
+  if('serviceWorker' in navigator){
+    window.addEventListener('load', function(){ navigator.serviceWorker.register('/sw.js').catch(function(){}); });
+  }
+
+  // Add-to-home-screen prompt
+  var KEY = 'po-a2hs-dismissed';
+  var standalone = (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || window.navigator.standalone === true;
+  if(standalone) return;
+  try{ if(localStorage.getItem(KEY)) return; }catch(e){}
+
+  var ua = navigator.userAgent || '';
+  var isiOS = /iPhone|iPad|iPod/.test(ua) && !window.MSStream;
+  var isSafari = /^((?!chrome|crios|android|fxios|edgios).)*safari/i.test(ua);
+  var deferred = null;
+
+  var css = ''
+    + '#po-a2hs{position:fixed;left:12px;right:12px;bottom:12px;z-index:4000;max-width:460px;margin:0 auto;'
+    + 'background:#0c1a14;color:#f4f6f6;border:1px solid rgba(200,162,74,.4);border-radius:16px;'
+    + 'box-shadow:0 18px 50px -12px rgba(0,0,0,.6);padding:13px 14px;display:none;align-items:center;gap:12px;'
+    + 'font-family:Inter,system-ui,-apple-system,sans-serif}'
+    + '#po-a2hs.show{display:flex;animation:poUp .4s ease}'
+    + '@keyframes poUp{from{transform:translateY(22px);opacity:0}to{transform:none;opacity:1}}'
+    + '#po-a2hs img{width:42px;height:42px;border-radius:10px;background:#08120d;padding:5px;flex:none;object-fit:contain}'
+    + '#po-a2hs .t{flex:1;font-size:.84rem;line-height:1.35}'
+    + '#po-a2hs .t b{display:block;font-size:.92rem;margin-bottom:1px}'
+    + '#po-a2hs .t small{color:#9fb0a6}'
+    + '#po-a2hs button{font-family:inherit;cursor:pointer}'
+    + '#po-a2hs .add{background:#c8a24a;color:#0c1a14;border:0;border-radius:100px;padding:9px 16px;font-weight:600;font-size:.85rem;white-space:nowrap}'
+    + '#po-a2hs .x{background:none;border:0;color:#9fb0a6;font-size:1.4rem;line-height:1;padding:0 4px}';
+  var st = document.createElement('style'); st.textContent = css; head.appendChild(st);
+
+  function dismiss(b){ b.classList.remove('show'); try{ localStorage.setItem(KEY,'1'); }catch(e){} }
+  function build(inner){
+    var b = document.createElement('div'); b.id = 'po-a2hs';
+    b.innerHTML = '<img src="https://www.primeoriginsatlas.org/logo.png" alt="Prime Origins">' + inner + '<button class="x" aria-label="Dismiss">&times;</button>';
+    document.body.appendChild(b);
+    b.querySelector('.x').addEventListener('click', function(){ dismiss(b); });
+    setTimeout(function(){ b.classList.add('show'); }, 1600);
+    return b;
+  }
+
+  if(isiOS && isSafari){
+    build('<div class="t"><b>Add Prime Origins to your Home Screen</b><small>Tap the Share icon, then &ldquo;Add to Home Screen&rdquo;.</small></div>');
+  } else {
+    window.addEventListener('beforeinstallprompt', function(e){
+      e.preventDefault(); deferred = e;
+      var b = build('<div class="t"><b>Install Prime Origins</b><small>Add it to your home screen for quick access.</small></div><button class="add">Add</button>');
+      b.querySelector('.add').addEventListener('click', function(){
+        b.classList.remove('show');
+        if(deferred){ deferred.prompt(); deferred.userChoice.then(function(){ try{ localStorage.setItem(KEY,'1'); }catch(e){} deferred = null; }); }
+      });
+    });
+    window.addEventListener('appinstalled', function(){ try{ localStorage.setItem(KEY,'1'); }catch(e){} });
+  }
+})();
