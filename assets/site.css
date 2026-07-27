@@ -318,3 +318,15 @@ footer .fcol a:hover{color:var(--gold)}
   .rv{opacity:1;transform:none}
   .marquee-track{animation:none}
 }
+
+/* --- Site-wide motion & polish (2026-07) --- */
+::selection{background:#C9A227;color:#101410}
+@media (prefers-reduced-motion:no-preference){
+  html{scroll-behavior:smooth}
+  .phero .crumb{opacity:0;animation:poFadeUp .8s ease forwards}
+  .phero h1{opacity:0;transform:translateY(16px);animation:poFadeUp .8s .18s ease forwards}
+  .phero .wrap>p{opacity:0;transform:translateY(16px);animation:poFadeUp .8s .36s ease forwards}
+  .phero .hero-bg img,.hero .hero-bg img{transform:scale(1.1);animation:poSlowZoom 14s ease-out forwards}
+}
+@keyframes poFadeUp{to{opacity:1;transform:none}}
+@keyframes poSlowZoom{to{transform:scale(1)}}
