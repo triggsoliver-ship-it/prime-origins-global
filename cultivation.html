@@ -19,7 +19,9 @@
 .phero h1{opacity:0;transform:translateY(16px);animation:cwUp .8s .18s ease forwards}
 .phero .wrap>p{opacity:0;transform:translateY(16px);animation:cwUp .8s .36s ease forwards}
 @keyframes cwUp{to{opacity:1;transform:none}}
-@media (prefers-reduced-motion:reduce){.phero .cw,.phero h1,.phero .wrap>p{opacity:1;transform:none;animation:none}}
+.phero .hero-bg img{transform:scale(1.12);animation:cwZoom 14s ease-out forwards}
+@keyframes cwZoom{to{transform:scale(1)}}
+@media (prefers-reduced-motion:reduce){.phero .cw,.phero h1,.phero .wrap>p,.phero .hero-bg img{opacity:1;transform:none;animation:none}}
 </style>
 </head>
 <body>
@@ -58,6 +60,13 @@
   </div>
 </div>
 
+<div class="marquee">
+  <div class="marquee-track">
+    <span>Calnejo <b>◆</b> Sun-Grown <b>◆</b> Full-Term <b>◆</b> Regenerative <b>◆</b> Navarro River Terroir <b>◆</b> Anderson Valley <b>◆</b></span>
+    <span>Calnejo <b>◆</b> Sun-Grown <b>◆</b> Full-Term <b>◆</b> Regenerative <b>◆</b> Navarro River Terroir <b>◆</b> Anderson Valley <b>◆</b></span>
+  </div>
+</div>
+
 <section style="padding-bottom:40px">
   <div class="wrap">
     <div class="split2">
@@ -67,9 +76,9 @@
         <p>Calnejo is the farming heart of Prime Origins: sixty thousand square feet of licensed canopy, draped across a south-facing hillside ringed by redwoods. Smart pots and engineered living soil feed the plants, and watershed restoration keeps the Navarro River healthier each year.</p>
         <p>This is regenerative, full-term, sun-grown cultivation — the slow way, the right way. Every batch that carries the Calnejo name starts on this hillside. The proof is in the resin.</p>
         <div class="stats" style="margin-top:30px">
-          <div class="stat"><div class="v">60k</div><div class="l">sq ft licensed canopy</div></div>
-          <div class="stat"><div class="v">2,094</div><div class="l">lbs bud projected</div></div>
-          <div class="stat"><div class="v">100%</div><div class="l">sun-grown</div></div>
+          <div class="stat"><div class="v" data-count="60" data-suffix="k">0</div><div class="l">sq ft licensed canopy</div></div>
+          <div class="stat"><div class="v" data-count="2094">0</div><div class="l">lbs bud projected</div></div>
+          <div class="stat"><div class="v" data-count="100" data-suffix="%">0</div><div class="l">sun-grown</div></div>
         </div>
       </div>
       <div class="s2-media rv d1"><img src="assets/img/story-grower.jpg" alt="A Calnejo cultivator inspecting a cannabis plant at Vista Ranch"></div>
