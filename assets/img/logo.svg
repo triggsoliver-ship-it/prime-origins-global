@@ -20,24 +20,25 @@
       <stop offset="0.5" stop-color="#ffffff" stop-opacity="0"/>
       <stop offset="1" stop-color="#0d2a18" stop-opacity="0.5"/>
     </linearGradient>
+    <!-- Punches truly transparent holes in the ribbon centres -->
+    <mask id="po-holes" maskUnits="userSpaceOnUse" x="0" y="0" width="200" height="120">
+      <rect width="200" height="120" fill="#fff"/>
+      <ellipse cx="60" cy="60" rx="16" ry="14" fill="#000"/>
+      <ellipse cx="140" cy="60" rx="16" ry="14" fill="#000"/>
+    </mask>
   </defs>
-  <!-- Left loop (P side) -->
-  <path d="M 100 60 C 80 20, 30 20, 22 60 C 14 100, 64 100, 100 60 Z"
-        fill="url(#po-blue)"/>
-  <path d="M 100 60 C 80 20, 30 20, 22 60 C 14 100, 64 100, 100 60 Z"
-        fill="url(#po-shine-blue)"/>
-  <path d="M 100 60 C 80 28, 36 28, 30 60 C 24 92, 64 92, 100 60"
-        fill="none" stroke="#ffffff" stroke-opacity="0.18" stroke-width="1.5"/>
-  <!-- Right loop (O side) -->
-  <path d="M 100 60 C 120 20, 170 20, 178 60 C 186 100, 136 100, 100 60 Z"
-        fill="url(#po-green)"/>
-  <path d="M 100 60 C 120 20, 170 20, 178 60 C 186 100, 136 100, 100 60 Z"
-        fill="url(#po-shine-green)"/>
-  <path d="M 100 60 C 120 28, 164 28, 170 60 C 176 92, 136 92, 100 60"
-        fill="none" stroke="#ffffff" stroke-opacity="0.18" stroke-width="1.5"/>
-  <!-- Inner cut-outs to make ribbon transparent inside -->
-  <ellipse cx="60" cy="60" rx="16" ry="14" fill="#000"/>
-  <ellipse cx="140" cy="60" rx="16" ry="14" fill="#000"/>
+  <g mask="url(#po-holes)">
+    <!-- Left loop (P side) -->
+    <path d="M 100 60 C 80 20, 30 20, 22 60 C 14 100, 64 100, 100 60 Z" fill="url(#po-blue)"/>
+    <path d="M 100 60 C 80 20, 30 20, 22 60 C 14 100, 64 100, 100 60 Z" fill="url(#po-shine-blue)"/>
+    <path d="M 100 60 C 80 28, 36 28, 30 60 C 24 92, 64 92, 100 60"
+          fill="none" stroke="#ffffff" stroke-opacity="0.18" stroke-width="1.5"/>
+    <!-- Right loop (O side) -->
+    <path d="M 100 60 C 120 20, 170 20, 178 60 C 186 100, 136 100, 100 60 Z" fill="url(#po-green)"/>
+    <path d="M 100 60 C 120 20, 170 20, 178 60 C 186 100, 136 100, 100 60 Z" fill="url(#po-shine-green)"/>
+    <path d="M 100 60 C 120 28, 164 28, 170 60 C 176 92, 136 92, 100 60"
+          fill="none" stroke="#ffffff" stroke-opacity="0.18" stroke-width="1.5"/>
+  </g>
   <!-- Center highlight -->
   <path d="M 92 60 C 96 56, 104 56, 108 60 C 104 64, 96 64, 92 60 Z"
         fill="#0b1e1e" opacity="0.85"/>
