@@ -7,13 +7,13 @@
   window.__poEco = true;
 
   var ECO = [
-    {name:'Prime Origins Global', role:'Group, governance and partnerships', url:'https://primeoriginsglobal.org/', current:true},
-    {name:'Prime Origins', role:'Supply, commerce and provenance', url:'https://primeorigins.org/'},
-    {name:'Prime Origins Atlas', role:'Environmental markets', url:'https://www.primeoriginsatlas.org/'},
-    {name:'TerraFi', role:'Asset finance and digital securities', url:'https://terrafi.me/'},
+    {name:'Prime Origins Global', role:'Group &amp; strategy', url:'https://primeoriginsglobal.org/', current:true},
+    {name:'Prime Origins', role:'Operations, commerce &amp; provenance', url:'https://primeorigins.org/'},
+    {name:'Prime Origins Atlas', role:'Carbon &amp; environmental markets', url:'https://primeoriginsatlas.org/'},
+    {name:'TerraFi', role:'Asset finance &amp; digital securities', url:'https://terrafi.me/'},
     {name:'Greenback', role:'Digital-dollar settlement', url:'https://gnbk.app/'}
   ];
-  var FOOT_BLURB = 'Prime Origins Global is the group-facing home for strategy, leadership, assets, partnerships and investor enquiries, alongside four associated platform brands.';
+  var FOOT_BLURB = 'Prime Origins Global connects the group’s operating strategy, international development and specialist platforms across operations, provenance, environmental markets, asset finance and settlement.';
   var NOTE = 'The names shown describe a public brand architecture, not a corporate structure. Each platform operates under its own terms, and availability of services varies by platform and jurisdiction.';
 
   // stylesheet (idempotent)
