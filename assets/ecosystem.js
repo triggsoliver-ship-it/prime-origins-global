@@ -24,10 +24,6 @@
     document.head.appendChild(l);
   }
 
-  // Use the self-hosted logo everywhere (pages still pointing at the Atlas-hosted copy)
-  var imgs = document.querySelectorAll('img[src*="primeoriginsatlas.org/logo.png"]');
-  for(var k = 0; k < imgs.length; k++){ imgs[k].setAttribute('src', '/assets/img/logo.svg'); }
-
   var EXT = ' target="_blank" rel="noopener noreferrer"';
 
   /* ---------- Header switcher ---------- */
