@@ -24,6 +24,10 @@
     document.head.appendChild(l);
   }
 
+  // Use this site's own copy of the logo (same file as the Atlas one)
+  var imgs = document.querySelectorAll('img[src*="primeoriginsatlas.org/logo.png"]');
+  for(var k = 0; k < imgs.length; k++){ imgs[k].setAttribute('src', '/assets/img/logo.png'); }
+
   var EXT = ' target="_blank" rel="noopener noreferrer"';
 
   /* ---------- Header switcher ---------- */
