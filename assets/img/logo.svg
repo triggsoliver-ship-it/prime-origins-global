@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 120" fill="none">
+  <defs>
+    <linearGradient id="po-blue" x1="0" y1="20" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1d4ed8"/>
+      <stop offset="0.5" stop-color="#1e6fb8"/>
+      <stop offset="1" stop-color="#0e8a8a"/>
+    </linearGradient>
+    <linearGradient id="po-green" x1="100" y1="20" x2="200" y2="100" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0e8a8a"/>
+      <stop offset="0.5" stop-color="#178f4e"/>
+      <stop offset="1" stop-color="#1d4d2c"/>
+    </linearGradient>
+    <linearGradient id="po-shine-blue" x1="0" y1="0" x2="0" y2="120" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#7cb6ff" stop-opacity="0.55"/>
+      <stop offset="0.5" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="1" stop-color="#0a1a3a" stop-opacity="0.5"/>
+    </linearGradient>
+    <linearGradient id="po-shine-green" x1="0" y1="0" x2="0" y2="120" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#aef0bf" stop-opacity="0.55"/>
+      <stop offset="0.5" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="1" stop-color="#0d2a18" stop-opacity="0.5"/>
+    </linearGradient>
+  </defs>
+  <!-- Left loop (P side) -->
+  <path d="M 100 60 C 80 20, 30 20, 22 60 C 14 100, 64 100, 100 60 Z"
+        fill="url(#po-blue)"/>
+  <path d="M 100 60 C 80 20, 30 20, 22 60 C 14 100, 64 100, 100 60 Z"
+        fill="url(#po-shine-blue)"/>
+  <path d="M 100 60 C 80 28, 36 28, 30 60 C 24 92, 64 92, 100 60"
+        fill="none" stroke="#ffffff" stroke-opacity="0.18" stroke-width="1.5"/>
+  <!-- Right loop (O side) -->
+  <path d="M 100 60 C 120 20, 170 20, 178 60 C 186 100, 136 100, 100 60 Z"
+        fill="url(#po-green)"/>
+  <path d="M 100 60 C 120 20, 170 20, 178 60 C 186 100, 136 100, 100 60 Z"
+        fill="url(#po-shine-green)"/>
+  <path d="M 100 60 C 120 28, 164 28, 170 60 C 176 92, 136 92, 100 60"
+        fill="none" stroke="#ffffff" stroke-opacity="0.18" stroke-width="1.5"/>
+  <!-- Inner cut-outs to make ribbon transparent inside -->
+  <ellipse cx="60" cy="60" rx="16" ry="14" fill="#000"/>
+  <ellipse cx="140" cy="60" rx="16" ry="14" fill="#000"/>
+  <!-- Center highlight -->
+  <path d="M 92 60 C 96 56, 104 56, 108 60 C 104 64, 96 64, 92 60 Z"
+        fill="#0b1e1e" opacity="0.85"/>
+</svg>

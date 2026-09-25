@@ -183,3 +183,12 @@
     window.addEventListener('appinstalled', function(){ try{ localStorage.setItem(KEY,'1'); }catch(e){} });
   }
 })();
+
+/* Prime Origins Global — load the shared ecosystem component (header switcher + footer) on every page */
+(function(){
+  if(window.__poEco) return;
+  var s = document.createElement('script');
+  s.src = '/assets/ecosystem.js';
+  s.defer = true;
+  document.head.appendChild(s);
+})();
