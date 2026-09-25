@@ -4,10 +4,6 @@
    ============================================================ */
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
-/* ---------- Logo (self-hosted SVG has real transparency, so no screen blend) ---------- */
-.logo img{height:40px;width:auto;mix-blend-mode:normal;filter:drop-shadow(0 0 10px rgba(217,164,65,.25))}
-.foot-top .fbrand img{height:38px;width:auto;mix-blend-mode:normal}
-
 /* ---------- Header: ecosystem switcher ---------- */
 .eco-switch{position:relative}
 .eco-btn{font-family:inherit;font-size:.76rem;font-weight:400;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);background:none;border:1px solid var(--line2);border-radius:100px;padding:8px 14px;min-height:40px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:color .25s,border-color .25s}
