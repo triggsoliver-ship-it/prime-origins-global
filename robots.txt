@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://primeoriginsglobal.org/sitemap.xml
+Sitemap: https://www.primeoriginsglobal.org/sitemap.xml
