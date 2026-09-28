@@ -5,18 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CBD & Wellness — Nature's Root & Better Aromatherapy | Prime Origins Global</title>
 <meta name="description" content="CBD and terpene-wellness ranges from partner brands Nature's Root and Better Aromatherapy, carried by Prime Origins. Retail, gift and wholesale shown separately.">
-<link rel="canonical" href="https://primeoriginsglobal.org/cbd.html">
+<link rel="canonical" href="https://www.primeoriginsglobal.org/cbd.html">
 <meta property="og:title" content="CBD & Wellness | Prime Origins Global">
 <meta property="og:description" content="The CBD and terpene-wellness ranges we carry from partner brands Nature's Root and Better Aromatherapy.">
-<meta property="og:image" content="https://primeoriginsglobal.org/assets/img/bud-macro3.jpg">
+<meta property="og:image" content="https://www.primeoriginsglobal.org/assets/img/bud-macro3.jpg">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Prime Origins Global">
-<meta property="og:url" content="https://primeoriginsglobal.org/cbd.html">
+<meta property="og:url" content="https://www.primeoriginsglobal.org/cbd.html">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@primeorigins_">
 <meta name="twitter:title" content="CBD & Wellness | Prime Origins Global">
 <meta name="twitter:description" content="The CBD and terpene-wellness ranges we carry from partner brands Nature's Root and Better Aromatherapy.">
-<meta name="twitter:image" content="https://primeoriginsglobal.org/assets/img/bud-macro3.jpg">
+<meta name="twitter:image" content="https://www.primeoriginsglobal.org/assets/img/bud-macro3.jpg">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -102,7 +102,7 @@
       <p class="fblurb">Prime Origins Global connects the group’s operating strategy, international development and specialist platforms across operations, provenance, environmental markets, asset finance and settlement.</p>
     </div>
     <div class="fcol"><h5>Explore</h5><a href="/#markets">Markets</a><a href="/#ecosystem">Ecosystem</a><a href="/#products">Products</a><a href="/cbd.html">CBD</a><a href="cultivation.html">Cultivation</a><a href="/#partner">Contact</a></div>
-    <div class="fcol"><h5>Prime Origins ecosystem</h5><a href="https://primeoriginsglobal.org/" aria-current="page">Prime Origins Global (this site)<span class="frole">Group &amp; strategy</span></a><a href="https://primeorigins.org/" target="_blank" rel="noopener noreferrer">Prime Origins ↗<span class="frole">Operations, commerce &amp; provenance</span></a><a href="https://primeoriginsatlas.org/" target="_blank" rel="noopener noreferrer">Prime Origins Atlas ↗<span class="frole">Carbon &amp; environmental markets</span></a><a href="https://terrafi.me/" target="_blank" rel="noopener noreferrer">TerraFi ↗<span class="frole">Asset finance &amp; digital securities</span></a><a href="https://gnbk.app/" target="_blank" rel="noopener noreferrer">Greenback ↗<span class="frole">Digital-dollar settlement</span></a><a class="fsocial" href="https://www.linkedin.com/company/primeorigins" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></div>
+    <div class="fcol"><h5>Prime Origins ecosystem</h5><a href="https://www.primeoriginsglobal.org/" aria-current="page">Prime Origins Global (this site)<span class="frole">Group &amp; strategy</span></a><a href="https://primeorigins.org/" target="_blank" rel="noopener noreferrer">Prime Origins ↗<span class="frole">Operations, commerce &amp; provenance</span></a><a href="https://primeoriginsatlas.org/" target="_blank" rel="noopener noreferrer">Prime Origins Atlas ↗<span class="frole">Carbon &amp; environmental markets</span></a><a href="https://terrafi.me/" target="_blank" rel="noopener noreferrer">TerraFi ↗<span class="frole">Asset finance &amp; digital securities</span></a><a href="https://gnbk.app/" target="_blank" rel="noopener noreferrer">Greenback ↗<span class="frole">Digital-dollar settlement</span></a><a class="fsocial" href="https://www.linkedin.com/company/primeorigins" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></div>
   </div>
   <div class="foot-base"><p>© 2026 Prime Origins. All rights reserved. Cannabis products are sold only through licensed channels where legally permitted. <span data-eco-note>The names shown describe a public brand architecture, not a corporate structure. Each platform operates under its own terms, and availability of services varies by platform and jurisdiction. </span><span style="opacity:.85">· Site designed by <a href="https://shipitstudio.co.uk" target="_blank" rel="noopener">shipitstudio.co.uk</a></span></p></div>
 </footer>
@@ -121,28 +121,51 @@
   function money(v){return '$'+Number(v).toFixed(2);}
   function priceLabel(p){var ps=(p.variants||[]).map(function(v){return parseFloat(v.price);}).filter(function(n){return !isNaN(n)&&n>0;});if(!ps.length)return '';var mn=Math.min.apply(null,ps),mx=Math.max.apply(null,ps);return mn===mx?money(mn):money(mn)+' – '+money(mx);}
   function imgFor(p){if(p.images&&p.images.length&&p.images[0].src)return p.images[0].src;return '';}
-  function tagsOf(p){var t=p.tags;if(Array.isArray(t))return t.join(' ');return String(t||'');}
-  function haystack(p){return ((p.title||'')+' '+(p.product_type||'')+' '+tagsOf(p)).toLowerCase();}
+  function tagsOf(p){var t=p.tags;if(Array.isArray(t))return t.map(function(x){return String(x);});return String(t||'').split(',');}
+  function tagArr(p){return tagsOf(p).map(function(x){return x.toLowerCase().trim();}).filter(Boolean);}
+  function haystack(p){return ((p.title||'')+' '+(p.product_type||'')+' '+tagArr(p).join(' ')).toLowerCase();}
   // Services, classes and non-products are not part of what we carry
   function isService(p){return /consult|class|workshop|service|appointment|gift card|e-?gift|shipping|insurance|donation|membership|subscription/.test(haystack(p));}
-  function isWholesale(p){return /wholesale|\bws\b|trade|bulk|case of|case pack/.test(haystack(p));}
+  // Wholesale/retail channel is decided from the store's own wholesale-show / wholesale-hide
+  // tag pair first (that is the trustworthy signal — a "wholesale-HIDE" tag means hidden FROM
+  // the wholesale channel, i.e. a retail item, not a wholesale one; a plain substring match on
+  // "wholesale" used to catch both and wrongly bucket B2C items as wholesale). Title/case-pack
+  // heuristics only apply when there is no explicit tag.
+  function isWholesale(p){
+    var tags=tagArr(p);
+    if(tags.indexOf('wholesale-hide')>-1) return false;
+    if(tags.some(function(t){return /^(wholesale-show|wholesale|trade|ws)$/.test(t);})) return true;
+    if(/^wh\b/i.test((p.title||'').trim())) return true;
+    var hay=((p.title||'')+' '+(p.product_type||'')).toLowerCase();
+    if(/case pack|case of/.test(hay)) return true;
+    return false;
+  }
   function isGift(p){return /gift set|gift box|gift pack|gift bundle|\bgift\b|sampler|bundle/.test(haystack(p));}
-  // Show a category label only when it reads like one; hide internal codes and slugs
+  // Approved override: items that are real partner-store SKUs but are not part of the CBD/
+  // wellness range this page curates (e.g. a genetic DNA test kit), so they don't get featured
+  // in the retail grid. Nothing is deleted from the live feed — only kept out of this page.
+  var CURATION_EXCLUDE = ['dna test'];
+  function isCurationExcluded(p){return CURATION_EXCLUDE.indexOf((p.title||'').trim().toLowerCase())>-1;}
+  // Show a category label only when it reads like one; hide internal channel/audience codes (WH, B2C, WS)
   function cleanType(p){
-    var t=(p.product_type||'').trim();
+    var raw=(p.product_type||'').trim();
+    if(!raw) return '';
+    var t=raw.replace(/\b(WH|B2C|WS)\b/gi,'').replace(/\s{2,}/g,' ').trim();
     if(!t||t.length>28) return '';
     if(/[_\/|]|\d{3,}/.test(t)) return '';
     if(/^(ws|wholesale|default|other|misc|uncategori[sz]ed|product|products|all|general|none)$/i.test(t)) return '';
     return t;
   }
+  // Clean the displayed title of internal "WH " prefixes without touching the underlying SKU/title data used elsewhere
+  function cleanTitle(p){return String(p.title||'').replace(/^WH[\s\-]+/i,'').trim();}
   function card(p,kind){
-    var img=imgFor(p),price=priceLabel(p),desc=strip(p.body_html),type=cleanType(p);
+    var img=imgFor(p),price=priceLabel(p),desc=strip(p.body_html),type=cleanType(p),title=cleanTitle(p);
     return '<article class="pc">'
-      + (img?'<div class="pcimg"><img loading="lazy" src="'+esc(img)+'" alt="'+esc(p.title||'')+'"></div>':'')
+      + (img?'<div class="pcimg"><img loading="lazy" src="'+esc(img)+'" alt="'+esc(title)+'"></div>':'')
       + '<div class="pcb">'
       + (kind==='wholesale'?'<span class="badge">Wholesale</span>':(kind==='gift'?'<span class="badge">Gift set</span>':''))
       + (type?'<span class="ptype">'+esc(type)+'</span>':'')
-      + '<h3>'+esc(p.title||'')+'</h3>'
+      + '<h3>'+esc(title)+'</h3>'
       + (price?'<span class="price">'+price+(kind==='wholesale'?' (trade)':'')+'</span>':'')
       + (desc?'<p class="pdesc">'+esc(desc)+'</p>':'')
       + '</div></article>';
@@ -156,9 +179,17 @@
     var retail=[],gifts=[],wholesale=[];
     products.forEach(function(p){
       if(isService(p)) return;
+      if(isCurationExcluded(p)) return;
       if(isWholesale(p)) wholesale.push(p);
       else if(isGift(p)) gifts.push(p);
       else retail.push(p);
+    });
+    // Curated ordering: recognisable, clearly-categorised products lead the retail row;
+    // items with no reliable category sort after them instead of appearing at random.
+    retail.sort(function(a,b){
+      var ta=cleanType(a)?0:1, tb=cleanType(b)?0:1;
+      if(ta!==tb) return ta-tb;
+      return String(a.title||'').localeCompare(String(b.title||''));
     });
     var total=retail.length+gifts.length+wholesale.length;
     if(!total) return '';
